@@ -16,5 +16,6 @@
 * Se va a crear 1 archivo 1-estadisticas.pdf (si tiene letras rojas hay que prestar atencion a los datos)
 * Se va a crear 1 archivo 2-formatos.pdf (si tiene letras rojas hay que prestar atencion a los datos)
 * Se va a crear 1 archivo 3-cant_filas_y_nombre_columnas.pdf (si tiene letras rojas hay que prestar atencion a los datos)
+
 Observaciones:
 * Si se va a generar un archivo executable se debe cambiar el archivo funciones_archivos.py debido a los directorios temporales donde se almacenan en memoria
