@@ -1,5 +1,25 @@
-# Ignorar todos los archivos de texto
+# Ignorar todos los archivos de pdf reportes
 *.pdf
 
 # Ignorar todos los archivos de texto
 *.csv
+
+# Ignorar ejecutable generado
+*.exe
+
+# Otros formatos
+*.pyc
+*.xls
+*.xlsx
+*.spec
+
+
+# Ignorar carpetas
+/dist
+/build
+/.VSCodeCounter/
+/__pycache__
+/paraBackup
+/paraAnalisis
+/env
+/
