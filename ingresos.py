@@ -3,9 +3,9 @@ import warnings
 import time
 
 
-from funciones_conversion import funcion_string_a_fecha, funcion_string_a_float, funcion_str_to_int, convertir_tipos_datos, funcion_float_to_str
+from funciones_conversion import funcion_string_a_fecha, funcion_string_a_float, funcion_str_to_int, convertir_tipos_datos
 from funciones_controles import control_cantidad_registros, control_nombre_columnas, verificar_vacios_o_nulos, comparar_tipo_datos_dataframe_csv
-from funciones_archivos import mover_archivos
+from funciones_archivos import mover_archivos, generar_archivo_csv, leer_csv
 from salida_errores import generar_archivo_errores_o_csv
 from funciones_estadisticas import calcular_estadisticas
 from funciones_pdf import generar_pdf_estadistico, generar_pdf_formatos, generar_pdf_cant_filas_y_nombre_columnas
@@ -13,8 +13,7 @@ from funciones_pdf import generar_pdf_estadistico, generar_pdf_formatos, generar
 # Ignorar las advertencias de RuntimeWarning
 warnings.filterwarnings("ignore", category=RuntimeWarning)
 
-input("El archivo que se va a leer se debe llamar entrada.csv, presione 2 Enter para continuar...")
-# input("Presione enter para continuar")
+input("El archivo que se va a leer se debe llamar entrada.csv, presione Enter para continuar...")
 
 # Guarda el tiempo de inicio
 start_time = time.time()
@@ -57,9 +56,10 @@ dtype_dict_esperado = {
     'Precinto Acoplado': 'str'
 }
 
-# definicion nombre de archivos entrada y salida
-nombre_archivo_csv_entrada = 'CSV_MATARIFE_INGRESOS 202306-202402.csv'
-nombre_archivo_csv_salida = './datos.csv'
+# Definicion nombre de archivos entrada y salida
+nombre_archivo_csv_entrada = 'entrada.csv'
+nombre_archivo_csv_salida = 'salida.csv'
+
 
 #   ------------------------ FIN DEFINICION VARIABLES --------------------------------------------------
 
@@ -82,8 +82,8 @@ estadisticas = {}
 #   ------------------------ INICIO LECTURA ARCHIVOS ------------------------------------------------
 
 #Leo el archivo csv del sistema de archivos
-datos =  leer_csv(nombre_archivo_csv_entrada, ',')
-# datos = pd.read_csv(nombre_archivo_csv_entrada, sep=',') 
+datos =  leer_csv(nombre_archivo_csv_entrada, ';')
+#datos = pd.read_csv(nombre_archivo_csv_entrada, sep=';') 
 print("Inicio de transformaciones y generacion de archivos Pdf")
 datos = datos.astype(str)
 # monto el drive
@@ -164,7 +164,7 @@ generar_archivo_csv(datos, nombre_archivo_csv_salida)
 #   ------------------------ INICIO MOVER ARCHIVOS ---------------------------------
 
 
-#TODO si existe algun error hacer la funcionalidad de no mover el archivo, consultar que error son los importantes
+# TODO si existe algun error hacer la funcionalidad de no mover el archivo, consultar que error son los importantes
 
 print("Inicio de movimiento de archivos")
 # mover archivos, se almacena en una variable booleana
@@ -177,7 +177,7 @@ end_time = time.time()
 
 duration = end_time - start_time
 print(f"El script tardó {round(duration/60, 2)} minutos en completarse.")
-input("Presione 2 Enter para terminar...")
+input("Presione Enter para terminar...")
 
 #   ------------------------ FIN MOVER ARCHIVOS ---------------------------------
 
