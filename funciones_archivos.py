@@ -52,7 +52,7 @@ def mover_archivos(nombre_archivo_entrada, nombre_archivo_salida, nueva_ubicacio
         # print("Ubicación del ejecutable: ", sys.executable)
         # cuando se va a generar un ejectuable hay que usar sys.executable ya que el ejecutable genera un directorio temporal y 
         # se pierde la ubicacion del archivo por lo que hay que descomentar la siguiente linea para generar el ejecutable
-        base_dir = os.path.dirname(sys.executable)  ## esto sirve para hacer el ejecutable
+        #base_dir = os.path.dirname(sys.executable)  ## esto sirve para hacer el ejecutable
         
         # cuando no se usa un archivo ejecutable se debe usar la siguiente linea, si se va generar el ejecutable
         # base_dir = os.path.dirname(os.path.abspath(__file__))
