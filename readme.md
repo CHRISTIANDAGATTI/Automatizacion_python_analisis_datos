@@ -16,3 +16,6 @@
 * Se va a crear 1 archivo 1-estadisticas.pdf (si tiene letras rojas hay que prestar atencion a los datos)
 * Se va a crear 1 archivo 2-formatos.pdf (si tiene letras rojas hay que prestar atencion a los datos)
 * Se va a crear 1 archivo 3-cant_filas_y_nombre_columnas.pdf (si tiene letras rojas hay que prestar atencion a los datos)
+
+# Observaciones
+* Deberia ser transparente para el usuario si ejecuta un archivo .exe o un archivo .py ya que se implemento el manejo dinamico en tiempo de ejecucion de rutas en la funcion mover_archivos mediante if/else

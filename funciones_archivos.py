@@ -43,7 +43,7 @@ def leer_csv(nombre_archivo : str, separador: str):
 
 
 
-#   mover_archivos('entrada.csv'          , 'salida.csv'               , 'paraBackup'            , 'paraAnalisis')
+#   mover_archivos('entrada.csv'          , 'salida.csv'               , 'paraBackup'            , 'paraDW')
 def mover_archivos(nombre_archivo_entrada, nombre_archivo_salida, nueva_ubicacion_original, nueva_ubicacion_transformado):
     try:
         
@@ -83,10 +83,10 @@ def mover_archivos(nombre_archivo_entrada, nombre_archivo_salida, nueva_ubicacio
         # print("directorio para backup ", directorio_paraBackup)     
         directorio_paraBackup = os.path.normpath(os.path.join(base_dir, nueva_ubicacion_original))
         
-        # './paraAnalisis'
-        # directorio_paraAnalisis = os.path.normpath(nueva_ubicacion_transformado)
-        # print("directorio para analisis ", directorio_paraAnalisis)        
-        directorio_paraAnalisis = os.path.normpath(os.path.join(base_dir, nueva_ubicacion_transformado))
+        # './paraDW'
+        # directorio_paraDW = os.path.normpath(nueva_ubicacion_transformado)
+        # print("directorio para DW ", directorio_paraDW)        
+        directorio_paraDW = os.path.normpath(os.path.join(base_dir, nueva_ubicacion_transformado))
 
 
         # ---------------------- CREACION DIRECTORIOS DESTINO y COPIA ARCHIVOS ORIGINALES-------------------------------------------
@@ -94,15 +94,15 @@ def mover_archivos(nombre_archivo_entrada, nombre_archivo_salida, nueva_ubicacio
         os.makedirs(directorio_paraBackup, exist_ok=True)
         
         # './paraAnalisis'
-        os.makedirs(directorio_paraAnalisis, exist_ok=True)
+        os.makedirs(directorio_paraDW, exist_ok=True)
 
 
         # print("inicio copia archivos originales")
         # copia './entrada.csv'  en la ruta './paraBackup' 
         # shutil.copy2(directorio_original_y_nombre_entrada, directorio_paraBackup)
         
-        # copia './salida.csv'  en la ruta './paraAnalisis'
-        # shutil.copy2(directorio_original_y_nombre_salida, directorio_paraAnalisis)
+        # copia './salida.csv'  en la ruta './paraDW'
+        # shutil.copy2(directorio_original_y_nombre_salida, directorio_paraDW)
         
         # print("fin copia archivos originales")
         # input("presione enter para continuar")
@@ -127,7 +127,7 @@ def mover_archivos(nombre_archivo_entrada, nombre_archivo_salida, nueva_ubicacio
         
         
         # genero una varialbe con el nombre ./paraAnalisis/2024-05-13_salida.csv
-        directorio_paraAnalisis_fecha_salida_csv = os.path.join(directorio_paraAnalisis, nombre_archivo_fecha_salida_csv)
+        directorio_paraDW_fecha_salida_csv = os.path.join(directorio_paraDW, nombre_archivo_fecha_salida_csv)
         
         
 
@@ -147,12 +147,12 @@ def mover_archivos(nombre_archivo_entrada, nombre_archivo_salida, nueva_ubicacio
 
         # Si el archivo de destino ya existe, se borra 
         # ./paraAnalisis/2024-05-13_salida.csv
-        if os.path.exists(directorio_paraAnalisis_fecha_salida_csv):
-            os.remove(directorio_paraAnalisis_fecha_salida_csv)
+        if os.path.exists(directorio_paraDW_fecha_salida_csv):
+            os.remove(directorio_paraDW_fecha_salida_csv)
             
 
         #            './entrada.csv'                    , 
-        shutil.copy2(directorio_original_y_nombre_salida, directorio_paraAnalisis_fecha_salida_csv )        
+        shutil.copy2(directorio_original_y_nombre_salida, directorio_paraDW_fecha_salida_csv )        
         os.remove(directorio_original_y_nombre_salida)
 
         return True
@@ -187,3 +187,41 @@ def generar_archivo_csv(df: pandas.DataFrame, nombre_archivo: str):
         print(f"Archivo {nombre_archivo} generado con éxito.")
     except Exception as e:
         print(f"Error al generar el archivo CSV: {e}")
+
+
+def mover_pdfs(directorio_origen, directorio_destino):
+    """
+    Mueve todos los archivos PDF de un directorio a otro.
+
+    Parámetros:
+    directorio_origen (str): El directorio de donde se moverán los archivos PDF.
+    directorio_destino (str): El directorio a donde se moverán los archivos PDF.
+
+    Devuelve:
+    None
+    """
+    if getattr(sys, 'frozen', False):
+    # El programa se está ejecutando como un ejecutable empaquetado con PyInstaller
+        base_dir = os.path.dirname(sys.executable)
+    else:
+    # El programa se está ejecutando como un script
+        base_dir = os.path.dirname(os.path.abspath(__file__))
+    
+    
+    
+    directorio_origen= os.path.normpath(os.path.join(base_dir, directorio_origen))
+    directorio_destino = os.path.normpath(os.path.join(base_dir,directorio_destino))
+    
+    # Asegúrate de que el directorio de destino exista
+    os.makedirs(directorio_destino, exist_ok=True)
+
+    # Recorre todos los archivos en el directorio de origen
+    for nombre_archivo in os.listdir(directorio_origen):
+        # Si el archivo es un PDF
+        if nombre_archivo.endswith('.pdf'):
+            # Construye las rutas completas del archivo en el origen y el destino
+            ruta_origen = os.path.join(directorio_origen, nombre_archivo)
+            ruta_destino = os.path.join(directorio_destino, nombre_archivo)
+
+            # Mueve el archivo
+            shutil.move(ruta_origen, ruta_destino)

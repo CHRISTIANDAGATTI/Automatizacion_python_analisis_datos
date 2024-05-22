@@ -88,28 +88,40 @@ def verificar_vacios_o_nulos(df, estaditicas: dict):
 def comparar_tipo_datos_dataframe_csv(df: pandas.DataFrame, resultado: list, dtype_dict_esperado: dict):
     """
     Compara los tipos de datos en un DataFrame dado con un diccionario de tipos de datos esperados.
-
     Parámetros:
     df (pandas.DataFrame): El DataFrame cuyos tipos de datos se van a comparar.
     resultado (list): Una lista para almacenar los resultados.
     dtype_dict_esperado (dict): Un diccionario de tipos de datos esperados.
-
     Returns:
     None
-
     """
     # Obtener el nombre de la función
     function_name = comparar_tipo_datos_dataframe_csv.__name__
-
     # Comparar los tipos de datos
     for columna in df.columns:
         if columna in dtype_dict_esperado:
             # Obtener los tipos de datos únicos en la columna
+            # unique_types es un array de numpy
             unique_types = df[columna].apply(type).unique()
             
-            # Extraer el nombre del tipo de datos con una expresión regular
-            dtype_actual = re.search("'(.*)'", str(unique_types[0])).group(1)
+            #conteo de nulos
+            num_nulos = df[columna].isnull().sum()
             
+            # Extraer el nombre del tipo de datos con una expresión regular
+            # dtype_actual = re.search("'(.*)'", str(unique_types[0])).group(1)
+            if (len(unique_types) > 1):
+                dtype_actual = "multiples tipos"
+            elif (num_nulos > 0):
+                dtype_actual = "existen nulos"
+            elif (len(unique_types) > 1 & num_nulos > 0):
+                dtype_actual = "nulos / multiples tipos"
+            elif (len(unique_types) == 1):
+                dtype_actual = re.search("'(.*)'", str(unique_types[0])).group(1)
+            else:
+                dtype_actual ="controlar"
+                
+            # print (columna, dtype_actual, num_nulos)
+
             dtype_esperado = dtype_dict_esperado[columna]
 
             if dtype_actual == dtype_esperado:
@@ -127,5 +139,6 @@ def comparar_tipo_datos_dataframe_csv(df: pandas.DataFrame, resultado: list, dty
             "dtype_actual": dtype_actual,
             "leyenda": leyenda
         }
-        
+
+                
         resultado.append(resultado_dict)

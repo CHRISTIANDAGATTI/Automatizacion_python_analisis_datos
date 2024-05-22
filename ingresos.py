@@ -85,7 +85,7 @@ estadisticas = {}
 datos =  leer_csv(nombre_archivo_csv_entrada, ';')
 #datos = pd.read_csv(nombre_archivo_csv_entrada, sep=';') 
 print("Inicio de transformaciones y generacion de archivos Pdf")
-datos = datos.astype(str)
+# datos = datos.astype(str) Pasar todo a string
 # monto el drive
 # from google.colab import files
 # from google.colab import drive
@@ -147,16 +147,19 @@ generar_pdf_formatos(resultados_formato, 'formatos.pdf', 'Reporte de formatos')
 
 # esta funcion genera pdf donde muestra si hubo columnas que no existen o la cant de filas de entrada y salida son distintas
 generar_pdf_cant_filas_y_nombre_columnas(resultados_cant_columnas_y_nombre_columnas, 'cant_filas_y_nombre_columnas.pdf', 'Reporte de cantidad de filas y nombre de columnas')
+
+
+mover_pdfs("./", "paraReportes")
+
 print("Fin de transformaciones y generacion de archivos Pdf")
 
-
 #   ------------------------ FIN GENERAR PDF ---------------------------------------
+
 
 #   ------------------------ INICIO CREAR CSV --------------------------------------
 
 # en este punto tengo 2 archivos 1) entrada.csv 2) salida.csv (Este ultimo tiene todos los datos transformados)
 generar_archivo_csv(datos, nombre_archivo_csv_salida)
-
 
 
 #   ------------------------ FIN CREAR CSV -----------------------------------------

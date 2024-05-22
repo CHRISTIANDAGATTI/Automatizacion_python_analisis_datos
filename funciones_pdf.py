@@ -121,9 +121,9 @@ def generar_pdf_formatos(resultado_formato: list, nombre_pdf_salida:str, titulo:
         ('GRID', (0,0), (-1,-1), 1, colors.black)
     ])
 
-    # Cambiar el color de la letra a rojo si la leyenda es 'no coincide'
+    # Cambiar el color de la letra a rojo si la leyenda es 'no coincide' o 'existe nulos'
     for i, dic in enumerate(resultado_formato, start=1):
-        if dic["leyenda"] == "no coincide":
+        if dic["leyenda"] == "no coincide" or dic["leyenda"] == "existe nulos":
             style.add('TEXTCOLOR', (0, i), (-1, i), colors.red)
 
     table.setStyle(style)
