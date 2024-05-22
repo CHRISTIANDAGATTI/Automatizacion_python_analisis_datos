@@ -5,7 +5,7 @@ import time
 
 from funciones_conversion import funcion_string_a_fecha, funcion_string_a_float, funcion_str_to_int, convertir_tipos_datos
 from funciones_controles import control_cantidad_registros, control_nombre_columnas, verificar_vacios_o_nulos, comparar_tipo_datos_dataframe_csv
-from funciones_archivos import mover_archivos, generar_archivo_csv, leer_csv
+from funciones_archivos import mover_archivos, generar_archivo_csv, leer_csv, mover_pdfs
 from salida_errores import generar_archivo_errores_o_csv
 from funciones_estadisticas import calcular_estadisticas
 from funciones_pdf import generar_pdf_estadistico, generar_pdf_formatos, generar_pdf_cant_filas_y_nombre_columnas
@@ -171,7 +171,7 @@ generar_archivo_csv(datos, nombre_archivo_csv_salida)
 
 print("Inicio de movimiento de archivos")
 # mover archivos, se almacena en una variable booleana
-resultado_mover_archivos = mover_archivos(nombre_archivo_csv_entrada, nombre_archivo_csv_salida, 'paraBackup', 'paraAnalisis')
+resultado_mover_archivos = mover_archivos(nombre_archivo_csv_entrada, nombre_archivo_csv_salida, 'paraBackup', 'paraDW')
 
 print("Fin de movimiento de archivos")
 

@@ -93,7 +93,7 @@ def mover_archivos(nombre_archivo_entrada, nombre_archivo_salida, nueva_ubicacio
         # './paraBackup' 
         os.makedirs(directorio_paraBackup, exist_ok=True)
         
-        # './paraAnalisis'
+        # './paraDW'
         os.makedirs(directorio_paraDW, exist_ok=True)
 
 
@@ -126,7 +126,7 @@ def mover_archivos(nombre_archivo_entrada, nombre_archivo_salida, nueva_ubicacio
         directorio_paraBackup_fecha_entrada_csv = os.path.join(directorio_paraBackup, nombre_archivo_fecha_entrada_csv)
         
         
-        # genero una varialbe con el nombre ./paraAnalisis/2024-05-13_salida.csv
+        # genero una varialbe con el nombre ./paraDW/2024-05-13_salida.csv
         directorio_paraDW_fecha_salida_csv = os.path.join(directorio_paraDW, nombre_archivo_fecha_salida_csv)
         
         
@@ -146,7 +146,7 @@ def mover_archivos(nombre_archivo_entrada, nombre_archivo_salida, nueva_ubicacio
             
 
         # Si el archivo de destino ya existe, se borra 
-        # ./paraAnalisis/2024-05-13_salida.csv
+        # ./paraDW/2024-05-13_salida.csv
         if os.path.exists(directorio_paraDW_fecha_salida_csv):
             os.remove(directorio_paraDW_fecha_salida_csv)
             
