@@ -188,7 +188,6 @@ def generar_archivo_csv(df: pandas.DataFrame, nombre_archivo: str):
     except Exception as e:
         print(f"Error al generar el archivo CSV: {e}")
 
-
 def mover_pdfs(directorio_origen, directorio_destino):
     """
     Mueve todos los archivos PDF de un directorio a otro.
@@ -207,8 +206,7 @@ def mover_pdfs(directorio_origen, directorio_destino):
     # El programa se está ejecutando como un script
         base_dir = os.path.dirname(os.path.abspath(__file__))
     
-    
-    
+
     directorio_origen= os.path.normpath(os.path.join(base_dir, directorio_origen))
     directorio_destino = os.path.normpath(os.path.join(base_dir,directorio_destino))
     
