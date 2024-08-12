@@ -34,7 +34,6 @@ dtype_dict_esperado = {
     'Cuit Productor':'str',
     'Tipo Movimiento':'str',
     'Fecha Ingreso': 'str',
-    'Fecha Ingreso modificada': 'str',
     'Eliminada':'int',
     'Intervenida':'int',
     'Tropa': 'int', 
@@ -86,19 +85,12 @@ datos =  leer_csv(nombre_archivo_csv_entrada, ';')
 #datos = pd.read_csv(nombre_archivo_csv_entrada, sep=';') 
 print("Inicio de transformaciones y generacion de archivos Pdf")
 # datos = datos.astype(str) Pasar todo a string
-# monto el drive
-# from google.colab import files
-# from google.colab import drive
-# drive.mount('/content/drive')
-
-#leer el archivo csv del drive
-# datos = pd.read_csv('/content/drive/MyDrive/Colab Notebooks/Faena/CSV_MATARIFE_FAENA 202306- 202402_ QUINTA PARTE.csv', sep=';', dtype=dtype_dict )
-
 
 #   ------------------------ FIN LECTURA ARCHIVOS ----------------------------------------
 
 #   ------------------------ INICIO TRANSFORMACION DATOS ---------------------------------
-
+# Filtrar columnas
+datos = datos[list(dtype_dict_esperado.keys())]
 datos = funcion_string_a_fecha(datos, errores_transformacion_datos, 'Fecha Ingreso') 
 datos = funcion_str_to_int(datos, errores_transformacion_datos, 'Eliminada')
 datos = funcion_str_to_int(datos, errores_transformacion_datos, 'Intervenida')
@@ -186,34 +178,4 @@ input("Presione Enter para terminar...")
 
 
 
-
-#convierto los datos
-# datos = convertir_tipos_datos(datos, dtype_dict, errores)
-# generar_archivo_errores_o_csv(errores, datos, 'datos.csv')
-
-
-
-# if (resultado_mover_archivos):
-#     generar_pdf(estadisticas, 'estadisticas.pdf', 15)
-# else:
-#     print("Ocurrio un error al mover los archivos.")
-
-
-# Imprime las estadisticas
-# if len(estadisticas) > 0:
-#     # print("Se encontraron los siguientes valores:")
-#     for item in estadisticas:
-#         print(item)
-# else:
-#     print("No hay estadisticas para mostrar.")
-
-
-
-# Imprime los errores
-# if len(resultados_cant_columnas_y_nombre_columnas) > 0:
-#     print("Se encontraron los siguientes errores:")
-#     for resultado in resultados_cant_columnas_y_nombre_columnas:
-#         print(resultado)
-# else:
-#     print("No se encontraron errores.")
 
